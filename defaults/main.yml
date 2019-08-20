@@ -1,8 +1,9 @@
 ---
-# packages
+# FIXME: replace with official repo when available
 enroot_ubuntu_repo_key_url: none
 enroot_ubuntu_repo_key_id: none
 enroot_ubuntu_repo: none
+
 enroot_packages:
   - enroot
   - 'enroot+caps'
