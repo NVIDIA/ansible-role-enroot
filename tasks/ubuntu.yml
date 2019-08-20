@@ -1,0 +1,20 @@
+---
+- name: repo key
+  apt_key:
+    url: "{{ enroot_ubuntu_repo_key_url }}"
+    id: "{{ enroot_ubuntu_repo_key_id }}"
+
+- name: repo
+  apt_repository:
+    repo: "{{ enroot_ubuntu_repo }}"
+
+- name: enroot packages
+  apt:
+    name: "{{ enroot_packages }}"
+    state: "{{ enroot_package_state }}"
+
+- name: enroot dependency packages
+  apt:
+    name:
+      - bash-completion
+      - pigz

@@ -1,0 +1,17 @@
+---
+# packages
+enroot_ubuntu_repo_key_url: none
+enroot_ubuntu_repo_key_id: none
+enroot_ubuntu_repo: none
+enroot_packages:
+  - enroot
+  - 'enroot+caps'
+enroot_package_state: present
+
+# a block of lines to add to enroot.conf
+enroot_config: ''
+
+# lists of { filename: '', content: '' }
+enroot_environ_config_files: []  # filenames should end with .env
+enroot_hook_config_files: []     # filenames should end with .sh
+enroot_mount_config_files: []    # filenames should end with .fstab

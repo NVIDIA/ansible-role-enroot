@@ -1,0 +1,41 @@
+---
+- name: ubuntu tasks
+  include_tasks: ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+- name: install slurm-pmi hook
+  file:
+    path: /etc/enroot/hooks.d/50-slurm-pmi.sh
+    state: link
+    src: /usr/share/enroot/hooks.d/50-slurm-pmi.sh
+
+- name: install bash completions
+  file:
+    path: /etc/bash_completion.d/enroot.bash_completion
+    state: link
+    src: /usr/share/enroot/enroot.bash_completion
+
+- name: configure enroot.conf
+  blockinfile:
+    path: /etc/enroot/enroot.conf
+    block: "{{ enroot_config }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK (ansible-role-enroot)"
+
+- name: configure environ.d/
+  copy:
+    dest: "/etc/enroot/environ.d/{{ item.filename }}"
+    content: "{{ item.content }}"
+  loop: "{{ enroot_environ_config_files }}"
+
+- name: configure hooks.d/
+  copy:
+    dest: "/etc/enroot/hooks.d/{{ item.filename }}"
+    content: "{{ item.content }}"
+    mode: '0755'
+  loop: "{{ enroot_hook_config_files }}"
+
+- name: configure mounts.d/
+  copy:
+    dest: "/etc/enroot/mounts.d/{{ item.filename }}"
+    content: "{{ item.content }}"
+  loop: "{{ enroot_mount_config_files }}"
