@@ -7,7 +7,12 @@ enroot_ubuntu_repo: none
 enroot_packages:
   - enroot
   - 'enroot+caps'
+
 enroot_package_state: present
+
+enroot_deb_packages:
+  - 'https://github.com/NVIDIA/enroot/releases/download/v2.0.1/enroot_2.0.1-1_amd64.deb'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v2.0.1/enroot+caps_2.0.1-1_amd64.deb'
 
 # a block of lines to add to enroot.conf
 enroot_config: ''
