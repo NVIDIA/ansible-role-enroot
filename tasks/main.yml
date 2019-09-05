@@ -3,12 +3,6 @@
   include_tasks: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-- name: install slurm-pmi hook
-  file:
-    path: /etc/enroot/hooks.d/50-slurm-pmi.sh
-    state: link
-    src: /usr/share/enroot/hooks.d/50-slurm-pmi.sh
-
 - name: install bash completions
   file:
     path: /etc/bash_completion.d/enroot.bash_completion
