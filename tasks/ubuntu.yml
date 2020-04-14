@@ -3,25 +3,25 @@
   apt_key:
     url: "{{ enroot_ubuntu_repo_key_url }}"
     id: "{{ enroot_ubuntu_repo_key_id }}"
-  when: enroot_ubuntu_repo|bool
+  when: enroot_ubuntu_repo == none
 
 - name: repo
   apt_repository:
     repo: "{{ enroot_ubuntu_repo }}"
-  when: enroot_ubuntu_repo|bool
+  when: enroot_ubuntu_repo == none
 
 - name: enroot packages
   apt:
     name: "{{ enroot_packages }}"
     state: "{{ enroot_package_state }}"
-  when: enroot_ubuntu_repo|bool
+  when: enroot_ubuntu_repo == none
 
 - name: enroot deb packages
   apt:
     deb: "{{ item }}"
     state: "{{ enroot_package_state }}"
   with_items: "{{ enroot_deb_packages }}"
-  when: not enroot_ubuntu_repo|bool
+  when: enroot_ubuntu_repo != none
 
 - name: enroot dependency packages
   apt:

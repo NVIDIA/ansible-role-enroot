@@ -1,15 +1,14 @@
 ---
-# FIXME: replace with official repo when available
+# Install option 1: provide repo, key, and list of packages
 enroot_ubuntu_repo_key_url: none
 enroot_ubuntu_repo_key_id: none
 enroot_ubuntu_repo: none
-
 enroot_packages:
   - enroot
   - 'enroot+caps'
-
 enroot_package_state: present
 
+# Install option 2 (default): provide direct URLs to debs
 enroot_deb_packages:
   - 'https://github.com/NVIDIA/enroot/releases/download/v2.0.1/enroot_2.0.1-1_amd64.deb'
   - 'https://github.com/NVIDIA/enroot/releases/download/v2.0.1/enroot+caps_2.0.1-1_amd64.deb'
