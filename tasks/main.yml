@@ -7,7 +7,7 @@
   file:
     path: /etc/bash_completion.d/enroot.bash_completion
     state: link
-    src: /usr/share/enroot/enroot.bash_completion
+    src: /usr/share/enroot/bash_completion
 
 - name: configure enroot.conf
   blockinfile:
