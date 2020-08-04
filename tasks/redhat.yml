@@ -2,6 +2,7 @@
 - name: install epel repository
   yum_repository:
     name: epel
+    description: epel
     baseurl: "{{ epel_baseurl }}"
     gpgkey: "{{ epel_gpgkey }}"
 
@@ -18,6 +19,7 @@
 - name: set up yum repository (if defined)
   yum_repository:
     name: enroot
+    description: enroot
     baseurl: "{{ enroot_rhel_repo }}"
     gpgkey: "{{ enroot_rhel_repo_gpgkey }}"
   when: enroot_rhel_repo is defined
