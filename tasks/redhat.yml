@@ -7,7 +7,8 @@
   - "bash-completion"
 
 - name: set up yum repository (if defined)
-  yum_repository: enroot
+  yum_repository:
+    name: enroot
     baseurl: "{{ enroot_rhel_repo }}"
     gpgkey: "{{ enroot_rhel_repo_gpgkey }}"
   when: enroot_rhel_repo is defined
