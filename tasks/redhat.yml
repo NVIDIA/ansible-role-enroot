@@ -1,10 +1,19 @@
 ---
+- name: install epel repository
+  yum_repository:
+    name: epel
+    baseurl: "{{ epel_baseurl }}"
+    gpgkey: "{{ epel_gpgkey }}"
+
 - name: install enroot dependency packages
   yum:
     name: "{{ item }}"
   with_items:
   - "pigz"
   - "bash-completion"
+  - "jq"
+  - "parallel"
+  - "zstd"
 
 - name: set up yum repository (if defined)
   yum_repository:
