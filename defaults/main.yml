@@ -1,17 +1,27 @@
 ---
-# Install option 1: provide repo, key, and list of packages
-enroot_ubuntu_repo_key_url: none
-enroot_ubuntu_repo_key_id: none
-enroot_ubuntu_repo: none
+# Names of packages to install
 enroot_packages:
   - enroot
   - 'enroot+caps'
 enroot_package_state: present
 
-# Install option 2 (default): provide direct URLs to debs
+# Install option 1 (default): provide direct URLs to debs or rpms
 enroot_deb_packages:
   - 'https://github.com/NVIDIA/enroot/releases/download/v3.0.2/enroot_3.0.2-1_amd64.deb'
   - 'https://github.com/NVIDIA/enroot/releases/download/v3.0.2/enroot+caps_3.0.2-1_amd64.deb'
+enroot_rpm_packages:
+  - 'https://github.com/NVIDIA/enroot/releases/download/v3.0.2/enroot-3.0.2-1.el7.x86_64.rpm'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v3.0.2/enroot+caps-3.0.2-1.el7.x86_64.rpm'
+
+# Install option 2: provide repo, key, and list of packages
+# No default repositories exist, so this will need to refer to repos you set up
+#
+#enroot_ubuntu_repo_key_url: ''
+#enroot_ubuntu_repo_key_id: ''
+#enroot_ubuntu_repo: ''
+#enroot_rhel_repo_gpgkey: ''
+#enroot_rhel_repo: ''
+
 
 # a block of lines to add to enroot.conf
 enroot_config: ''

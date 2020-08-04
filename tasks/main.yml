@@ -3,6 +3,10 @@
   include_tasks: ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
+- name: rhel tasks
+  include_tasks: rhel.yml
+  when: ansible_os_family == 'RedHat'
+
 - name: install bash completions
   file:
     path: /etc/bash_completion.d/enroot.bash_completion
