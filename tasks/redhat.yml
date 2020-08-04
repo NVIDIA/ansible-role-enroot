@@ -10,10 +10,10 @@
   yum:
     name: "{{ item }}"
   with_items:
-  - "pigz"
   - "bash-completion"
   - "jq"
   - "parallel"
+  - "pigz"
   - "zstd"
 
 - name: set up yum repository (if defined)
