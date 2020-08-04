@@ -4,7 +4,7 @@
   when: ansible_distribution == 'Ubuntu'
 
 - name: rhel tasks
-  include_tasks: rhel.yml
+  include_tasks: redhat.yml
   when: ansible_os_family == 'RedHat'
 
 - name: install bash completions
