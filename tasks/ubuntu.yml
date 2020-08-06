@@ -28,5 +28,3 @@
     state: "{{ enroot_package_state }}"
   with_items: "{{ enroot_deb_packages }}"
   when: enroot_ubuntu_repo is not defined
-
-
