@@ -1,0 +1,39 @@
+---
+- name: install epel repository
+  yum_repository:
+    name: epel
+    description: epel
+    baseurl: "{{ epel_baseurl }}"
+    gpgkey: "{{ epel_gpgkey }}"
+
+- name: install enroot dependency packages
+  yum:
+    name: "{{ item }}"
+  with_items:
+  - "bash-completion"
+  - "jq"
+  - "parallel"
+  - "pigz"
+  - "zstd"
+
+- name: set up yum repository (if defined)
+  yum_repository:
+    name: enroot
+    description: enroot
+    baseurl: "{{ enroot_rhel_repo }}"
+    gpgkey: "{{ enroot_rhel_repo_gpgkey }}"
+  when: enroot_rhel_repo is defined
+
+- name: install packages from repo (if defined)
+  yum:
+    name: "{{ item }}"
+    state: "{{ enroot_package_state }}"
+  with_items: "{{ enroot_packages }}"
+  when: enroot_rhel_repo is defined
+
+- name: install rpm packages directly if no repo is defined
+  yum:
+    name: "{{ item }}"
+    state: "{{ enroot_package_state }}"
+  with_items: "{{ enroot_rpm_packages }}"
+  when: enroot_rhel_repo is not defined
