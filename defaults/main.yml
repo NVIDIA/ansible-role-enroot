@@ -10,11 +10,11 @@ enroot_package_state: present
 
 # Install option 1 (default): provide direct URLs to debs or rpms
 enroot_deb_packages:
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.1.1/enroot_3.1.1-1_amd64.deb'
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.1.1/enroot+caps_3.1.1-1_amd64.deb'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot_3.2.0-1_amd64.deb'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot+caps_3.2.0-1_amd64.deb'
 enroot_rpm_packages:
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.1.1/enroot-3.1.1-1.el7.x86_64.rpm'
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.1.1/enroot+caps-3.1.1-1.el7.x86_64.rpm'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot-3.2.0-1.el7.x86_64.rpm'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot+caps-3.2.0-1.el7.x86_64.rpm'
 
 # Install option 2: provide repo, key, and list of packages
 # No default repositories exist, so this will need to refer to repos you set up
