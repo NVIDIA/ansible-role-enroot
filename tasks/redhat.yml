@@ -1,10 +1,8 @@
 ---
 - name: install epel repository
-  yum_repository:
-    name: epel
-    description: epel
-    baseurl: "{{ epel_baseurl }}"
-    gpgkey: "{{ epel_gpgkey }}"
+  package:
+    name: epel-release
+    state: present
 
 - name: install enroot dependency packages
   yum:
