@@ -61,3 +61,14 @@
   notify:
   - reboot node
 
+- name: set max_user_namespaces 
+  sysctl:
+    name: user.max_user_namespaces
+    value: "{{ enroot_max_user_namespaces }}"
+    state: present
+
+- name: set max_mnt_namespaces
+  sysctl:
+    name: user.max_mnt_namespaces
+    value: "{{ enroot_max_mnt_namespaces }}"
+    state: present

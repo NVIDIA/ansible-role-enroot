@@ -35,3 +35,5 @@ enroot_mount_config_files: []    # filenames should end with .fstab
 enroot_configure_kernel_options: true
 enroot_configure_kernel_options_versions: "ALL"
 enroot_reboot_timeout: 900
+enroot_max_user_namespaces: 65536
+enroot_max_mnt_namespaces: 65536
