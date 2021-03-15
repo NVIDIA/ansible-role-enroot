@@ -30,3 +30,8 @@ enroot_config: ''
 enroot_environ_config_files: []  # filenames should end with .env
 enroot_hook_config_files: []     # filenames should end with .sh
 enroot_mount_config_files: []    # filenames should end with .fstab
+
+# Should we configure kernel on RedHat systems and reboot?
+enroot_configure_kernel_options: true
+enroot_configure_kernel_options_versions: "ALL"
+enroot_reboot_timeout: 900

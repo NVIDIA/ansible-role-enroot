@@ -35,3 +35,29 @@
     state: "{{ enroot_package_state }}"
   with_items: "{{ enroot_rpm_packages }}"
   when: enroot_rhel_repo is not defined
+
+- name: check if kernel unpriv enabled
+  shell: "cat /proc/cmdline | grep 'namespace.unpriv_enable=1'"
+  register: kernel_unpriv_enable
+  failed_when: kernel_unpriv_enable.rc == 127
+
+- name: check if user namespaces enabled
+  shell: "cat /proc/cmdline | grep 'user_namespace.enable=1'"
+  register: kernel_user_namespace
+  failed_when: kernel_user_namespace.rc == 127
+
+- name: install grubby if needed
+  yum:
+    name: "grubby"
+    state: "present"
+  when: ((kernel_unpriv_enable.rc == 1) or (kernel_user_namespace.rc == 1)) and enroot_configure_kernel_options
+
+- name: add kernel options to use enroot
+  command: "grubby --update-kernel={{ enroot_configure_kernel_options_versions }} --args={{ item }}"
+  when: ((kernel_unpriv_enable.rc == 1) or (kernel_user_namespace.rc == 1)) and enroot_configure_kernel_options
+  with_items:
+    - "namespace.unpriv_enable=1"
+    - "user_namespace.enable=1"
+  notify:
+  - reboot node
+
