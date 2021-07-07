@@ -27,4 +27,5 @@
     deb: "{{ item }}"
     state: "{{ enroot_package_state }}"
   with_items: "{{ enroot_deb_packages }}"
+  environment: "{{proxy_env if proxy_env is defined else {}}}"
   when: enroot_ubuntu_repo is not defined
