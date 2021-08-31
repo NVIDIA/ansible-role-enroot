@@ -1,7 +1,7 @@
 ---
 - name: install epel repository
   package:
-    name: epel-release
+    name: "{{ epel_package }}"
     state: present
 
 - name: install enroot dependency packages
