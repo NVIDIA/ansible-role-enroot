@@ -16,16 +16,31 @@
     repo: "{{ enroot_ubuntu_repo }}"
   when: enroot_ubuntu_repo is defined
 
-- name: enroot packages
+# We need to do a remove/install dance due to dependency conflicts
+# when installing raw packages from Github
+- name: Correctly install and/or upgrade Enroot packages from deb
+  when: enroot_ubuntu_repo is not defined
+  block:
+  - name: gather package facts for comparison
+    package_facts:
+      manager: apt
+  - name: remove existing enroot package if we are changing version
+    apt:
+      name: "{{ enroot_packages }}"
+      state: "absent"
+    when:
+    - "'enroot' in ansible_facts.packages"
+    - "ansible_facts.packages['enroot'][0]['version'] != enroot_version_string"
+  - name: enroot deb packages
+    apt:
+      deb: "{{ item }}"
+      state: "{{ enroot_package_state }}"
+    with_items: "{{ enroot_deb_packages }}"
+    environment: "{{proxy_env if proxy_env is defined else {}}}"
+
+- name: Install enroot packages from repos
   apt:
     name: "{{ enroot_packages }}"
     state: "{{ enroot_package_state }}"
   when: enroot_ubuntu_repo is defined
-
-- name: enroot deb packages
-  apt:
-    deb: "{{ item }}"
-    state: "{{ enroot_package_state }}"
-  with_items: "{{ enroot_deb_packages }}"
-  environment: "{{proxy_env if proxy_env is defined else {}}}"
-  when: enroot_ubuntu_repo is not defined
+  
