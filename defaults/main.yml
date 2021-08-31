@@ -4,14 +4,17 @@ enroot_packages:
   - enroot
   - 'enroot+caps'
 enroot_package_state: present
+enroot_version: "3.2.0"
+enroot_release: "1"
+enroot_version_string: "{{ enroot_version }}-{{ enroot_release }}"
 
 # Install option 1 (default): provide direct URLs to debs or rpms
 enroot_deb_packages:
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot_3.2.0-1_amd64.deb'
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot+caps_3.2.0-1_amd64.deb'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v{{ enroot_version }}/enroot_{{ enroot_version_string }}_amd64.deb'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v{{ enroot_version }}/enroot+caps_{{ enroot_version_string }}_amd64.deb'
 enroot_rpm_packages:
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot-3.2.0-1.el7.x86_64.rpm'
-  - 'https://github.com/NVIDIA/enroot/releases/download/v3.2.0/enroot+caps-3.2.0-1.el7.x86_64.rpm'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v{{ enroot_version }}/enroot-{{ enroot_version_string }}.el7.x86_64.rpm'
+  - 'https://github.com/NVIDIA/enroot/releases/download/v{{ enroot_version }}/enroot+caps-{{ enroot_version_string }}.el7.x86_64.rpm'
 
 epel_package: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
 

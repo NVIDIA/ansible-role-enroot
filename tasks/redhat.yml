@@ -29,12 +29,24 @@
   with_items: "{{ enroot_packages }}"
   when: enroot_rhel_repo is defined
 
-- name: install rpm packages directly if no repo is defined
-  yum:
-    name: "{{ item }}"
-    state: "{{ enroot_package_state }}"
-  with_items: "{{ enroot_rpm_packages }}"
+- name: Correctly install and/or upgrade Enroot packages from rpm
   when: enroot_rhel_repo is not defined
+  block:
+  - name: gather package facts for comparison
+    package_facts:
+      manager: rpm
+  - name: remove existing enroot package if we are changing version
+    yum:
+      name: "{{ enroot_packages }}"
+      state: "absent"
+    when:
+    - "'enroot' in ansible_facts.packages"
+    - "ansible_facts.packages['enroot'][0]['version'] != enroot_version_string"
+  - name: enroot rpm packages
+    yum:
+      name: "{{ item }}"
+      state: "{{ enroot_package_state }}"
+    with_items: "{{ enroot_rpm_packages }}"
 
 - name: check if kernel unpriv enabled
   shell: "cat /proc/cmdline | grep 'namespace.unpriv_enable=1'"
