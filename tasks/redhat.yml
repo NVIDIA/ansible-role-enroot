@@ -47,6 +47,7 @@
       name: "{{ item }}"
       state: "{{ enroot_package_state }}"
     with_items: "{{ enroot_rpm_packages }}"
+    environment: "{{proxy_env if proxy_env is defined else {}}}"
 
 - name: check if kernel unpriv enabled
   shell: "cat /proc/cmdline | grep 'namespace.unpriv_enable=1'"

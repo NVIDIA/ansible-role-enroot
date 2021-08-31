@@ -36,9 +36,11 @@
       deb: "{{ item }}"
       state: "{{ enroot_package_state }}"
     with_items: "{{ enroot_deb_packages }}"
+    environment: "{{proxy_env if proxy_env is defined else {}}}"
 
 - name: Install enroot packages from repos
   apt:
     name: "{{ enroot_packages }}"
     state: "{{ enroot_package_state }}"
   when: enroot_ubuntu_repo is defined
+  
