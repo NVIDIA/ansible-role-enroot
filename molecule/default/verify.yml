@@ -1,0 +1,28 @@
+---
+- name: Verify
+  hosts: all
+  tasks:
+  - name: gather package facts
+    package_facts:
+
+  - name: check that enroot is installed
+    assert:
+      that:
+      - "'enroot' in ansible_facts.packages"
+      - "'enroot+caps' in ansible_facts.packages"
+
+  - name: check for path to enroot
+    command: which enroot
+    register: which_enroot
+    changed_when: which_enroot.rc != 0
+
+  - name: verify path to enroot
+    assert:
+      that:
+      - "'/usr/bin/enroot' in which_enroot.stdout"
+
+  - name: check that bash completion is present
+    command: ls /etc/bash_completion.d/enroot.bash_completion
+
+  - name: check that enroot.conf is present
+    command: ls /etc/enroot/enroot.conf

@@ -7,6 +7,14 @@
   include_tasks: redhat.yml
   when: ansible_os_family == 'RedHat'
 
+- name: ensure bash completion dir exists
+  file:
+    path: /etc/bash_completion.d
+    owner: root
+    group: root
+    mode: 755
+    state: directory
+
 - name: install bash completions
   file:
     path: /etc/bash_completion.d/enroot.bash_completion
