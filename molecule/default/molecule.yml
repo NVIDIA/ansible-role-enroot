@@ -13,9 +13,6 @@ platforms:
   - name: centos-7
     image: geerlingguy/docker-centos7-ansible
     pre_build_image: true
-  - name: centos-8
-    image: geerlingguy/docker-centos8-ansible
-    pre_build_image: true
 provisioner:
   name: ansible
 verifier:
