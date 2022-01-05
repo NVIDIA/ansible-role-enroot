@@ -28,6 +28,7 @@ enroot_rpm_packages:
   - 'https://github.com/NVIDIA/enroot/releases/download/v{{ enroot_version }}/enroot+caps-{{ enroot_version_string }}.el7.x86_64.rpm'
 
 epel_package: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm"
+epel_gpg_key: "https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"
 
 # Install option 2: provide repo, key, and list of packages
 # No default repositories exist, so this will need to refer to repos you set up

@@ -1,6 +1,11 @@
 ---
+- name: install gpg key for epel repository
+  rpm_key:
+    key: "{{ epel_gpg_key }}"
+    state: present
+
 - name: install epel repository
-  package:
+  yum:
     name: "{{ epel_package }}"
     state: present
 
@@ -46,6 +51,7 @@
     yum:
       name: "{{ item }}"
       state: "{{ enroot_package_state }}"
+      disable_gpg_check: true
     with_items: "{{ enroot_rpm_packages }}"
     environment: "{{proxy_env if proxy_env is defined else {}}}"
 
