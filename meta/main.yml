@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: enroot
+  namespace: nvidia
   author: Luke Yeager
   company: NVIDIA
   description: Install enroot
@@ -10,6 +11,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - 'bionic'
+        - 'focal'
     - name: EL
       versions:
         - '7'

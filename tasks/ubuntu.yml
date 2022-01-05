@@ -1,6 +1,7 @@
 ---
 - name: enroot dependency packages
   apt:
+    update_cache: yes
     name:
       - bash-completion
       - pigz
